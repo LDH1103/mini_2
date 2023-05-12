@@ -8,5 +8,12 @@
 </head>
 <body>
     List File!!!!
+    <button id="logout" onclick="redirectLogout();">Logout</button>
+
+    <script>
+        function redirectLogout() {
+            location.href = "/user/logout";
+        }
+    </script>
 </body>
 </html>

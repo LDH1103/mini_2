@@ -24,6 +24,13 @@ class UserController extends Controller{
         return _BASE_REDIRECT."/product/list";
     }
 
+    // 로그아웃 메소드
+    public function logoutGet() {
+        session_unset();
+        session_destroy();
+        return "login"._EXTENSION_PHP;
+    }
+
 }
 
 ?>
