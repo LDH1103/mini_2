@@ -28,6 +28,7 @@ class UserController extends Controller{
     public function logoutGet() {
         session_unset();
         session_destroy();
+        // 로그인 페이지 리턴
         return "login"._EXTENSION_PHP;
     }
 
