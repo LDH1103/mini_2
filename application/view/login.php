@@ -8,12 +8,14 @@
 </head>
 <body>
     <h1>Login</h1>
+    <h3 style="color: red;"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></h3>
     <!-- 경로앞에 /를 붙여주면 ROOT(htdocs)에서 시작한다는 뜻 -->
     <form action="/user/login" method="post">
         <label for="id">ID</label>
         <input type="text" name="id" id="id">
         <label for="pw">PW</label>
-        <input type="text" name="pw" id="pw">
+        <input type="password" name="pw" id="pw">
+        <button type="submit">Login</button>
     </form>
 </body>
 </html>
