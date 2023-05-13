@@ -20,6 +20,7 @@ class Application {
         $arrPath = UrlUtil::getUrlArrPath(); 
         
         // $arrPath[0]이 있다면 첫글자를 대문자로 변환해서 반환
+        // $arrPath[0]이 없다면 "User"를 반환
         // + ex) URL 경로가 "/product/list"인 경우 $arrPath 배열에는 "product"와 "list" 두 개의 요소가 저장되고, 
         // + 첫번째 요소인 "product"를 ucfirst 함수를 사용하여 대문자로 변환한 후 "Controller"와 연결하여,
         // + "ProductController"라는 문자열이 $identityName 변수에 저장
