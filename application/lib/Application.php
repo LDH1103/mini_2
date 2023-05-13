@@ -20,7 +20,9 @@ class Application {
         $arrPath = UrlUtil::getUrlArrPath(); 
         
         // $arrPath[0]이 있다면 첫글자를 대문자로 변환해서 반환
-        // + URL 경로의 "User"가 존재하는 경우 문자열 "Controller"와 연결하여 사용할 컨트롤러의 이름을 결정
+        // + ex) URL 경로가 "/product/list"인 경우 $arrPath 배열에는 "product"와 "list" 두 개의 요소가 저장되고, 
+        // + 첫번째 요소인 "product"를 ucfirst 함수를 사용하여 대문자로 변환한 후 "Controller"와 연결하여,
+        // + "ProductController"라는 문자열이 $identityName 변수에 저장
         $identityName = empty($arrPath[0]) ? "User" : ucfirst($arrPath[0]); 
         
         // GET이 전부 대문자기때문에 모두 소문자로 바꿔준 뒤, 첫글자만 대문자로
