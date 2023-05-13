@@ -8,9 +8,14 @@
 </head>
 <body>
     List File!!!!
-    <button id="logout">Logout</button>
+    <button id="logout" onclick="logoutBtn();">Logout</button>
 
 
-    <script src="./js/list.js"></script>
+    <!-- <script src="./js/list.js"></script> -->
+    <script>
+        function logoutBtn() {
+            location.href = "/user/logout";
+        }
+    </script>
 </body>
 </html>

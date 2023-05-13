@@ -12,7 +12,7 @@ class ProductController extends Controller{
         return "list"._EXTENSION_PHP;
     }
 
-    // -------------------------------------------------
+    // --------------------js get-----------------------------
     public $urlPathJs;
 
     public function getLastPath() {
@@ -25,7 +25,7 @@ class ProductController extends Controller{
         // 현재 URL에서 가장 마지막의 경로명을 가져옴
         $lastPath = $this->getLastPath();
         // js 파일 경로 생성
-        $jsPath = "../view/js/$lastPath";
+        $jsPath = _PATH_VIEW."js/$lastPath";
         // js 파일 로드
         header('Content-Type: application/javascript');
         readfile($jsPath);
