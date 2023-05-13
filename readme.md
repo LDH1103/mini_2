@@ -11,6 +11,8 @@
 	- <Directory "${SRVROOT}/htdocs">내 AllowOverride 설정 변경 (272 행)
 		AllowOverride None -> AllowOverride All
 
+	- 아파치 서비스 재시작
+
 3. root에 .htaccess 파일 생성 후 아래 내용 삽입
 	Options -MultiViews
 	RewriteEngine On

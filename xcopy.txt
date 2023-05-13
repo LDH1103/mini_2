@@ -1,1 +1,1 @@
-D:\workspace\mini_2 C:\Apache24\htdocs /H /Y /F /E /exclude:D:\workspace\mini_2\exclude.txt
+xcopy D:\workspace\mini_2 C:\Apache24\htdocs /H /Y /F /E /exclude:D:\workspace\mini_2\exclude.txt

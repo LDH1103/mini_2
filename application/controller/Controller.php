@@ -8,9 +8,11 @@ use \AllowDynamicProperties; // DynamicProperty를 사용하려면 적어줌
 #[AllowDynamicProperties] // DynamicProperty를 사용하려면 적어줌
 class Controller {
     protected $model;
-    private static $modelList = []; // 여러개의 모델을 불러올 경우, 이미 불러온 모델을 또다시 불러올 경우 많은 메모리를 사용하게됨, 서버의 부하를 줄이기 위해 사용
-    private static $arrNeedAuth = ["product/list"]; // 인증이 필요한 페이지 이름을 적어줌
-
+     // 여러개의 모델을 불러올 경우, 이미 불러온 모델을 또다시 불러올 경우 많은 메모리를 사용하게됨, 서버의 부하를 줄이기 위해 사용
+    private static $modelList = [];
+    // 인증이 필요한 페이지 이름을 적어줌
+    private static $arrNeedAuth = ["product/list"]; 
+    
     // 생성자
     public function __construct($identityName, $action) {
         // session start

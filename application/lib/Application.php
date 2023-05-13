@@ -12,27 +12,43 @@ use application\util\UrlUtil;
 
 // 클래스명은 파일명과 똑같이
 class Application {
-
+    
     // 생성자
     public function __construct() {
-        $arrPath = UrlUtil::getUrlArrPath(); // 접속 url을 배열로 획득
-        $identityName = empty($arrPath[0]) ? "User" : ucfirst($arrPath[0]); // $arrPath[0]이 있다면 첫글자를 대문자로 변환해서 반환
-        $action = (empty($arrPath[1]) ? "login" : $arrPath[1]).ucfirst(strtolower($_SERVER["REQUEST_METHOD"])); // GET이 전부 대문자기때문에 모두 소문자로 바꿔준 뒤, 첫글자만 대문자로
-
+        // 접속 url을 배열로 획득
+        // + UrlUtil::getUrlArrPath() 메서드를 사용하여 URL 경로를 배열로 가져옴
+        $arrPath = UrlUtil::getUrlArrPath(); 
+        
+        // $arrPath[0]이 있다면 첫글자를 대문자로 변환해서 반환
+        // + URL 경로의 "User"가 존재하는 경우 문자열 "Controller"와 연결하여 사용할 컨트롤러의 이름을 결정
+        $identityName = empty($arrPath[0]) ? "User" : ucfirst($arrPath[0]); 
+        
+        // GET이 전부 대문자기때문에 모두 소문자로 바꿔준 뒤, 첫글자만 대문자로
+        // + URL 경로의 "login"이 존재하는 경우 HTTP 요청 메서드(첫 글자를 대문자로 소문자로 변환)와 연결하여 수행할 작업을 결정함
+        $action = (empty($arrPath[1]) ? "login" : $arrPath[1]).ucfirst(strtolower($_SERVER["REQUEST_METHOD"])); 
+        
+        
         // Controller명 작성
+        // + 결정된 컨트롤러 이름을 기반으로 컨트롤러 파일의 경로를 구성
         $controllerPath = _PATH_CONTROLLER.$identityName._BASE_FILENAME_CONTROLLER._EXTENSION_PHP;
-
+        
+        
         // 에러 처리(해당 Controller 파일 존재 여부 체크)
+        // + 컨트롤러 파일이 있는지 확인하고 없으면 오류 메시지와 함께 프로그램을 종료
         if(!file_exists($controllerPath)) {
             echo "해당 컨트롤러 파일이 없습니다. : $controllerPath";
             exit();
         }
-
+        
+        
         // 해당 Controller 호출
+        // + 결정된 컨트롤러 이름을 기반으로 컨트롤러 클래스의 이름을 지정
+        // + ex) $identityName 변수가 "User"라는 값이면, 컨트롤러 클래스의 이름은 "UserController"가 됨
         $controllerName = UrlUtil::replaceSlashToBackslash(_PATH_CONTROLLER.$identityName._BASE_FILENAME_CONTROLLER);
+        // + 결정된 동작을 매개변수로 컨트롤러 클래스를 인스턴스화함
         new $controllerName($identityName, $action);
     }
-
+    
 }
 
 
