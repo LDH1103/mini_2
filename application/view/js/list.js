@@ -1,5 +1,3 @@
-const logoutBtn = document.getElementById( "logout" );
+const logoutBtn = document.getElementById( 'logout' );
 
-logoutBtn.onclick = function() {
-    location.href = "/user/logout";
-}
+logoutBtn.addEventListener('click', () => location.href = '/user/logout');

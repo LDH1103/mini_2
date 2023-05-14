@@ -10,7 +10,7 @@ class UserController extends Controller{
         return "login"._EXTENSION_PHP;
     }
 
-    // + OST 방식으로 로그인 정보를 전달할 때 실행되는 메서드
+    // + POST 방식으로 로그인 정보를 전달할 때 실행되는 메서드
     public function loginPost() {
         $result = $this->model->getUser($_POST);
         // 유저 유무 체크

@@ -27,7 +27,7 @@ class Application {
         $identityName = empty($arrPath[0]) ? "User" : ucfirst($arrPath[0]); 
         
         // GET이 전부 대문자기때문에 모두 소문자로 바꿔준 뒤, 첫글자만 대문자로
-        // + URL 경로의 "login"이 존재하는 경우 HTTP 요청 메서드(첫 글자를 대문자로 소문자로 변환)와 연결하여 수행할 작업을 결정함
+        // + URL 경로의 "login"이 존재하는 경우 HTTP 요청 메서드(첫 글자를 대문자로 변환)와 연결하여 수행할 작업을 결정함
         $action = (empty($arrPath[1]) ? "login" : $arrPath[1]).ucfirst(strtolower($_SERVER["REQUEST_METHOD"])); 
         
         
