@@ -12,7 +12,7 @@
     <button id="logout">Logout</button>
 
 
-    <script src="./js/list.js"></script>
+    <script src="/application/view/js/list.js"></script>
     <!-- <script>
         function logoutBtn() {
             location.href = "/user/logout";
