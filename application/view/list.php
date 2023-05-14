@@ -8,15 +8,8 @@
 </head>
 <body>
     List File!!!!
-    <!-- <button id="logout" onclick="logoutBtn();">Logout</button> -->
     <button id="logout">Logout</button>
 
-
     <script src="/application/view/js/list.js"></script>
-    <!-- <script>
-        function logoutBtn() {
-            location.href = "/user/logout";
-        }
-    </script> -->
 </body>
 </html>
