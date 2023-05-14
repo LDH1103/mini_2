@@ -14,8 +14,7 @@ class ProductController extends Controller {
 
     // --------------------js get-----------------------------
     public function getLastPath() {
-        $urlPath = UrlUtil::getUrl();
-        return basename($urlPath);
+        return basename(UrlUtil::getUrl());
     }
 
     public function jsGet() {
