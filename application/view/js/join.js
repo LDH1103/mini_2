@@ -2,6 +2,7 @@ const joinBtn = document.getElementById('joinBtn');
 
 joinBtn.addEventListener('click', () => chkPassword());
 
+// 플래그 써서 해보기
 function chkPassword() {
     let p1 = document.getElementById('pw').value;
     let p2 = document.getElementById('check_pw').value;
