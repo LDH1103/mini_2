@@ -26,7 +26,10 @@ class UserController extends Controller{
         // + 정보가 있다면, 로그인 성공 처리, 세션에 유저 ID를 저장하고, 리스트 페이지로 이동
         // session에 User ID 저장
         $_SESSION[_STR_LOGIN_ID] = $_POST["id"];
+        // session에 name 저장
+        $_SESSION[_STR_LOGIN_NAME] = $result[0][_STR_LOGIN_NAME];
         // 메인 페이지 리턴
+        // var_dump($result);
         return _BASE_REDIRECT."/shop/main";
     }
 
@@ -43,10 +46,22 @@ class UserController extends Controller{
         return "join"._EXTENSION_PHP;
     }
 
-    public function joinPost() {
-        UserModel::insertUser();
+    // 회원가입 처리
+
+    public function test() {
+        return $this->model->joinTest($_POST);
     }
 
+    public function joinPost() {
+        $test = $this->test();
+        if(empty($test)) {
+            $this->model->joinUser($_POST);
+            return "main"._EXTENSION_PHP;
+        } else {
+            echo "<script>alert('중복된 ID 입니다.');</script>";
+            return "join"._EXTENSION_PHP;
+        }
+    }
 }
 
 ?>

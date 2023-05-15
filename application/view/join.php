@@ -10,26 +10,28 @@
     <div class="main_container">
         <form action="/user/join" method="post">
             <label for="id">아이디</label>
-            <input type="text" id="id" name="id" require>
+            <input type="text" id="id" name="id" required>
+            <br>
+            <button type="button" onclick="">아이디 중복 확인</button>
             <br>
             <label for="pw">비밀번호</label>
-            <input type="passowrd" id="pw" name="pw" require>
+            <input type="passowrd" id="pw" name="pw" required>
             <br>
             <label for="check_pw">비밀번호 확인</label>
-            <input type="text" id="check_pw" name="check_pw" require>
+            <input type="text" id="check_pw" name="check_pw" required>
             <br>
             <label for="name">이름</label>
-            <input type="text" id="name" name="name" require>
+            <input type="text" id="name" name="name" required>
             <br>
             <label for="address">주소</label>
-            <input type="text" id="address" name="address" require>
+            <input type="text" id="address" name="address" required>
             <br>
             <label for="phone_num">전화번호</label>
-            <input type="text" id="phone_num" name="phone_num" require>
+            <input type="text" id="phone_num" name="phone_num" required>
             <br>
             <label for="email">이메일</label>
             <input type="text" id="email" name="email">
-            <button type="submit" id="joinBtn">회원 가입</button>
+            <button id="joinBtn">회원 가입</button>
         </form>
     </div>
     <script src="/application/view/js/join.js"></script>

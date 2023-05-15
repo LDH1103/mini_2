@@ -33,6 +33,7 @@
                                 if(!isset($_SESSION[_STR_LOGIN_ID])) {
                             ?>
                                     <li><a class="dropdown-item" href="/user/login">로그인</a></li>
+                                    <li><a class="dropdown-item" href="/user/join">회원 가입</a></li>
                             <?php
                                 } else {
                             ?>
@@ -77,6 +78,13 @@
                 <li><a href="#">카테고리</a></li>
                 <li><a href="#">카테고리</a></li>
                 <li><a href="#">카테고리</a></li>
+                <?php
+                if(isset($_SESSION[_STR_LOGIN_ID])) {
+                ?>
+                    <li><a href="#"><?php echo $_SESSION[_STR_LOGIN_NAME]."님, 반갑습니다" ?></a></li>
+                <?php
+                }
+                ?>
             </ul>
         </div>
         <!-- /사이드바 -->
