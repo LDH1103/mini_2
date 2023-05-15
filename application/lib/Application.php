@@ -16,18 +16,18 @@ class Application {
     // 생성자
     public function __construct() {
         // 접속 url을 배열로 획득
-        // + UrlUtil::getUrlArrPath() 메서드를 사용하여 URL 경로를 배열로 가져옴
+        // + UrlUtil.php의 getUrlArrPath() 메서드를 사용하여 URL 경로를 배열로 가져옴
         $arrPath = UrlUtil::getUrlArrPath(); 
         
         // $arrPath[0]이 있다면 첫글자를 대문자로 변환해서 반환
         // $arrPath[0]이 없다면 "User"를 반환
         // + ex) URL 경로가 "/product/list"인 경우 $arrPath 배열에는 "product"와 "list" 두 개의 요소가 저장되고, 
-        // + 첫번째 요소인 "product"를 ucfirst 함수를 사용하여 대문자로 변환한 후 "Controller"와 연결하여,
+        // + 첫번째 요소인 "product"를 ucfirst 함수를 사용하여 첫글자를 대문자로 변환한 후 "Controller"와 연결하여,
         // + "ProductController"라는 문자열이 $identityName 변수에 저장
         $identityName = empty($arrPath[0]) ? "User" : ucfirst($arrPath[0]); 
         
-        // GET이 전부 대문자기때문에 모두 소문자로 바꿔준 뒤, 첫글자만 대문자로
-        // + URL 경로의 "login"이 존재하는 경우 HTTP 요청 메서드(첫 글자를 대문자로 변환)와 연결하여 수행할 작업을 결정함
+        // GET이 전부 대문자기때문에 모두 소문자로 바꿔준 뒤, 첫글자만 대문자로(= Get)
+        // + URL 경로의 "login"이 존재하는 경우 HTTP 요청 메서드(첫 글자를 대문자로 변환, = Get, Post)와 연결하여 수행할 작업을 결정함
         $action = (empty($arrPath[1]) ? "login" : $arrPath[1]).ucfirst(strtolower($_SERVER["REQUEST_METHOD"])); 
         
         
