@@ -17,22 +17,25 @@ class Application {
     public function __construct() {
         // 접속 url을 배열로 획득
         // + UrlUtil.php의 getUrlArrPath() 메서드를 사용하여 URL 경로를 배열로 가져옴
+        // + UrlUtil의 네임스페이스를 적어주지 않은 이유 : 최상단에  use application\util\UrlUtil;로 경로를 잡아줘서
         $arrPath = UrlUtil::getUrlArrPath(); 
         
         // $arrPath[0]이 있다면 첫글자를 대문자로 변환해서 반환
         // $arrPath[0]이 없다면 "User"를 반환
         // + ex) URL 경로가 "/product/list"인 경우 $arrPath 배열에는 "product"와 "list" 두 개의 요소가 저장되고, 
-        // + 첫번째 요소인 "product"를 ucfirst 함수를 사용하여 첫글자를 대문자로 변환한 후 "Controller"와 연결하여,
-        // + "ProductController"라는 문자열이 $identityName 변수에 저장
+        // + 첫번째 요소인 "product"를 ucfirst 함수를 사용하여 첫글자를 대문자로 변환한 후,
+        // + "Product"라는 문자열이 $identityName 변수에 저장
         $identityName = empty($arrPath[0]) ? "User" : ucfirst($arrPath[0]); 
         
         // GET이 전부 대문자기때문에 모두 소문자로 바꿔준 뒤, 첫글자만 대문자로(= Get)
-        // + URL 경로의 "login"이 존재하는 경우 HTTP 요청 메서드(첫 글자를 대문자로 변환, = Get, Post)와 연결하여 수행할 작업을 결정함
+        // + URL 경로의 "login"이 존재하는 경우 HTTP 요청 메서드(첫 글자를 대문자로 변환, = Get)와 연결하여 수행할 작업을 결정함
+        // + ex) loginGet
         $action = (empty($arrPath[1]) ? "login" : $arrPath[1]).ucfirst(strtolower($_SERVER["REQUEST_METHOD"])); 
         
         
         // Controller명 작성
         // + 결정된 컨트롤러 이름을 기반으로 컨트롤러 파일의 경로를 구성
+        // + = application/controller/$identityName+Controller.php
         $controllerPath = _PATH_CONTROLLER.$identityName._BASE_FILENAME_CONTROLLER._EXTENSION_PHP;
         
         
@@ -47,8 +50,10 @@ class Application {
         // 해당 Controller 호출
         // + 결정된 컨트롤러 이름을 기반으로 컨트롤러 클래스의 이름을 지정
         // + ex) $identityName 변수가 "User"라는 값이면, 컨트롤러 클래스의 이름은 "UserController"가 됨
+        // + ex) $controllerName = application\controller\UserController
         $controllerName = UrlUtil::replaceSlashToBackslash(_PATH_CONTROLLER.$identityName._BASE_FILENAME_CONTROLLER);
         // + 결정된 동작을 매개변수로 컨트롤러 클래스를 인스턴스화함
+        // + application\controller\UserController("User", "loginGet");
         new $controllerName($identityName, $action);
     }
     

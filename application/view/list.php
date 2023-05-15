@@ -5,9 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List</title>
+    <link rel="stylesheet" href="/application/view/css/common.css">
+    <link rel="stylesheet" href="/application/view/css/list.css">
 </head>
 <body>
-    List File!!!!
+    <p>List File!!!!</p>
+
     <button id="logout">Logout</button>
 
     <script src="/application/view/js/list.js"></script>

@@ -14,6 +14,7 @@ class Controller {
     private static $arrNeedAuth = ["product/list"]; 
     
     // 생성자
+    // + $identityName : User, $action : loginGet
     public function __construct($identityName, $action) {
         // session start
         // + 현재 세션이 없으면 세션을 시작
@@ -43,9 +44,14 @@ class Controller {
     protected function getModel($identityName) {
         // model 생성 체크
         // + 현재 생성된 모델 배열(self::$modelList)에 모델이 없으면 생성
+        // + self:: : 나 자신
+        // + $this-> 가 아닌 self:: 를 사용한 이유 : Application.php에서 호출한 컨트롤러는 UserController이기 때문에, 
+        // + Controller.php 의 private 에는 $this->로 접근할수 없음($this의 영역은 UserController)
         if(!in_array($identityName, self::$modelList)) {
             // + model class 호출해서 모델 객체 생성
+            // + ex) application\model\UserModel
             $modelName = UrlUtil::replaceSlashToBackslash(_PATH_MODEL.$identityName._BASE_FILENAME_MODEL);
+            // + ex) $modelList["User"] = new application\model\UserModel();
             self::$modelList[$identityName] = new $modelName(); // model class 호출
         }
         // + 생성된 모델 객체 리턴
@@ -78,7 +84,7 @@ class Controller {
             // + strpos($urlPath, $authPath) === 0 : $urlPath(현재경로)가 $authPath(인증이 필요한 페이지 경로)로 시작된다면
             // + ex) $urlPath 가 "product/list" 이고 $authPath 가 "product" 라면 strpos($urlPath, $authPath) 는 0
             // + URL 경로($urlPath)가 인증이 필요한 페이지($authPath)의 경로로 시작하는 경우에만 참이 됨
-            // + 세션이없다면(= 로그인이 되어있지 않다면)
+            // + && 세션이없다면(= 로그인이 되어있지 않다면)
             if(!isset($_SESSION[_STR_LOGIN_ID]) && strpos($urlPath, $authPath) === 0) {
                 // + 로그인 페이지로 redirect
                 header(_BASE_REDIRECT."/user/login");
