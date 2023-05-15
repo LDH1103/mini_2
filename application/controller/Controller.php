@@ -11,7 +11,8 @@ class Controller {
     // 여러개의 모델을 불러올 경우, 이미 불러온 모델을 또다시 불러올 경우 많은 메모리를 사용하게됨, 서버의 부하를 줄이기 위해 사용
     private static $modelList = [];
     // 인증이 필요한 페이지 이름을 적어줌
-    private static $arrNeedAuth = ["product/list"]; 
+    // private static $arrNeedAuth = ["product/list"]; 
+    private static $arrNeedAuth = ["user/logout"]; 
     
     // 생성자
     // + $identityName : User, $action : loginGet
@@ -29,6 +30,8 @@ class Controller {
         $this->model = $this->getModel($identityName);
 
         // controller의 메소드 호출
+        // + ex) $view = UserController의 loginGet();
+        // + ex) $view = login.php
         $view = $this->$action();
 
         if(empty($view)) {
@@ -37,6 +40,7 @@ class Controller {
         }
 
         // view 호출
+        // + ex) require_once(application/view/login.php);
         require_once $this->getView($view);
     }
 
@@ -47,6 +51,7 @@ class Controller {
         // + self:: : 나 자신
         // + $this-> 가 아닌 self:: 를 사용한 이유 : Application.php에서 호출한 컨트롤러는 UserController이기 때문에, 
         // + Controller.php 의 private 에는 $this->로 접근할수 없음($this의 영역은 UserController)
+        // + 쉽게말해, 나 자신(Controller.php)의 $modelList를 사용하겠다
         if(!in_array($identityName, self::$modelList)) {
             // + model class 호출해서 모델 객체 생성
             // + ex) application\model\UserModel
@@ -59,19 +64,27 @@ class Controller {
     }
 
     // 파라미터를 확인해서 해당하는 view를 리턴하거나 redirect
+    // + ex) $view = login.php
     protected function getView($view) {
         // view를 체크 : 화면이동 시에는 _BASE_REDIRECT(= "Location: ")를 붙여줄것임
+        // + $view에 "Location: "가 담겨있는지 확인
         if(strpos($view, _BASE_REDIRECT) === 0) {
             header($view);
             exit();
         }
 
         // 뷰 파일 경로 반환
+        // + ex) application/view/login.php
         return _PATH_VIEW.$view;
     }
 
     // 동적 속성(DynamicProperty)을 세팅하는 메소드
+    // + 필드에 선언되어 있지 않은 속성들을 처리 하면서 추가할 수 있음
+    // + ex) protected $model;은 정적 속성
+    // + $this->key는 어디에도 선언되어 있지 않지만, 처리하면서 추가가 가능함
+    // + DynamicProperty를 사용하지 않을경우, 필드에 에러메세지를 선언 해두고 사용하면 됨
     protected function addDynamicProperty($key, $val) {
+        // + ex) "errMsg" = "입력하신 회원 정보가 없습니다.";
         $this->$key = $val;
     }
 

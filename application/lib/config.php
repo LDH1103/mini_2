@@ -16,6 +16,7 @@ define("_DB_CHARSET", "utf8mb4");
 
 // EXTENSION : 확장자
 define("_EXTENSION_PHP", ".php");
+define("_EXTENSION_HTML", ".html");
 
 // PATH : 경로
 define("_PATH_CONTROLLER", "application/controller/");
