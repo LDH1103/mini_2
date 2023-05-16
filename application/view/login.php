@@ -11,13 +11,13 @@
     <link rel="stylesheet" href="/application/view/css/login.css">
 </head>
 <body>
-    <h1 class="titleLogin">Login</h1>
+    <h1 class="titleLogin"><a href="/shop/main" class="header">Login</a></h1>
     <div class="loginBox">
         <form action="/user/login" method="post" class="idPwBox">
-            <input type="text" name="id" id="id" placeholder="아이디" maxlength="12" class="inputOutline inputId" spellcheck="false">
+            <input type="text" name="id" id="id" placeholder="아이디" maxlength="12" class="inputOutline inputId" spellcheck="false" required>
             <br>
-            <input type="password" name="pw" id="pw" placeholder="비밀번호" maxlength="512" class="inputOutline inputPw">
-            <button type="submit" class="btn btn-outline-dark">Login</button>
+            <input type="password" name="pw" id="pw" placeholder="비밀번호" maxlength="512" class="inputOutline inputPw" required>
+            <button type="submit" class="btn btn-outline-dark loginBtn">Login</button>
         </form>
         <!-- 에러 메세지 -->
         <h3 class="errMsg"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></h3>

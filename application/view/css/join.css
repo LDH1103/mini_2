@@ -1,0 +1,32 @@
+.titleJoin {
+    text-align: center;
+}
+.header {
+    text-decoration: none;
+    color: #000;
+}
+.header:hover {
+    color: #00000088;
+}
+.main_container {
+    margin: 50px auto;
+}
+.joinBox {
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #cccccc8c;
+    border-radius: 10px;
+    width: 50vw;
+    min-width: 400px;
+    max-width: 500px;
+    height: 60vh;
+    min-height: 500px;
+}
+label {
+    display: inline-block;
+    width: 120px;
+    margin: 5px;
+}
+.errMsg {
+    color: red;
+}

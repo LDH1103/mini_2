@@ -1,17 +1,32 @@
 .titleLogin {
     text-align: center;
 }
+.header {
+    text-decoration: none;
+    color: #000;
+}
+.header:hover {
+    color: #00000088;
+}
 .loginBox {
     margin: 30px auto;
     padding: 10px;
     border: 1px solid #cccccc8c;
     border-radius: 10px;
     width: 50vw;
+    min-width: 400px;
+    max-width: 500px;
     height: 30vh;
+    min-height: 300px;
 }
 .idPwBox {
-    margin: 50px auto 0 auto;
-    width: 30vw;
+    margin: 50px auto;
+    width: 300px;
+    min-width: 275px;
+}
+.loginBtn {
+    position: relative;
+    bottom: 20px;
 }
 .inputOutline {
     border: 1px solid #cccccc8c;

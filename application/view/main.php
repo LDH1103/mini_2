@@ -71,13 +71,6 @@
         <!-- 사이드바 -->
         <div id="sidebar-wrapper" class="d-none d-sm-block">
             <ul class="sidebar-nav">
-                <li><a href="#">카테고리</a></li>
-                <li><a href="#">카테고리</a></li>
-                <li><a href="#">카테고리</a></li>
-                <li><a href="#">카테고리</a></li>
-                <li><a href="#">카테고리</a></li>
-                <li><a href="#">카테고리</a></li>
-                <li><a href="#">카테고리</a></li>
                 <?php
                 if(isset($_SESSION[_STR_LOGIN_ID])) {
                 ?>
@@ -85,6 +78,13 @@
                 <?php
                 }
                 ?>
+                <li><a href="#">카테고리</a></li>
+                <li><a href="#">카테고리</a></li>
+                <li><a href="#">카테고리</a></li>
+                <li><a href="#">카테고리</a></li>
+                <li><a href="#">카테고리</a></li>
+                <li><a href="#">카테고리</a></li>
+                <li><a href="#">카테고리</a></li>
             </ul>
         </div>
         <!-- /사이드바 -->

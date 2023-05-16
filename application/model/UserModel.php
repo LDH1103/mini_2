@@ -3,7 +3,8 @@
 namespace application\model;
 
 class UserModel extends Model{
-    public function joinTest($UserInfo) {
+    // $pwFlg = true : 두번째 파라미터가 있으면 받아서 씀
+    public function getUser($arrUserInfo, $pwFlg = true) {
         $sql = 
             " SELECT "
             ."      * "
@@ -13,38 +14,22 @@ class UserModel extends Model{
             ."      u_id = :id "
             ;
 
-        $prepare = [
-            ":id"   => $UserInfo["id"]
-        ];
-        try {
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute($prepare);
-            $result = $stmt->fetchAll();
-        } catch(Exception $e) {
-            echo "UserModel->getUser Error : ".$e->getmessage();
-            exit();
-        } finally {
-            $this->closeConn();
+        // PW 추가한 동적 쿼리
+        if($pwFlg) {
+            $sql .= 
+                " AND "
+                ."      u_pw = :pw ";
         }
-        return $result;
-    }
-
-    public function getUser($arrUserInfo) {
-        $sql = 
-            " SELECT "
-            ."      * "
-            ." FROM "
-            ."      user_info "
-            ." WHERE "
-            ."      u_id = :id "
-            ." AND "
-            ."      u_pw = :pw "
-            ;
 
         $prepare = [
             ":id"   => $arrUserInfo["id"]
-            ,":pw"  => $arrUserInfo["pw"]
         ];
+
+        // PW 추가한 동적 쿼리
+        if($pwFlg) {
+            $prepare[":pw"] = $arrUserInfo["pw"];
+        }
+
         try {
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($prepare);
@@ -52,12 +37,11 @@ class UserModel extends Model{
         } catch(Exception $e) {
             echo "UserModel->getUser Error : ".$e->getmessage();
             exit();
-        } finally {
-            $this->closeConn();
         }
         return $result;
     }
 
+    //Insert User
     public function joinUser($arrUserInfo) {
         $sql =
             " INSERT INTO "
@@ -90,20 +74,12 @@ class UserModel extends Model{
             ];
 
         try {
-            $this->conn->beginTransaction();
             $stmt = $this->conn->prepare( $sql );
-            $stmt->execute( $arr_prepare );
-            $result_cnt = $stmt->rowCount();
-            $this->conn->commit();
+            $result = $stmt->execute( $arr_prepare );
+            return $result;
         } catch ( Exception $e ) {
-            $this->conn->rollback();
-            echo "UserModel->joinMember Error : ".$e->getmessage();
-            exit();
-        } finally {
-            $this->closeConn();
+            return false;
         }
-    
-        return $result_cnt;
     }
 
 }
