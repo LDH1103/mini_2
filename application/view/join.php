@@ -27,8 +27,7 @@
             <label for="check_pw">비밀번호 확인</label>
             <input type="password" id="check_pw" name="check_pw" oninput="chkPassword()">
             <br>
-            <span class="errMsg"><?php if(isset($this->arrError["check_pw"])) { echo $this->arrError["check_pw"]; } ?></span>
-            <span class="errMsg" id="chk_pw_msg"></span>
+            <span class="errMsg" id="chk_pw_msg"><?php if(isset($this->arrError["check_pw"])) { echo $this->arrError["check_pw"]; } ?></span>
             <br>
             <label for="name">이름</label>
             <input type="text" id="name" name="name" spellcheck="false" maxlength="6" value="<?php if(isset($this->arrInputVal["name"])) { echo $this->arrInputVal["name"]; } ?>" oninput="this.value = this.value.replace(/[^ㄱ-힣.]/g, '').replace(/(\..*)\./g, '$1'); checkName();">

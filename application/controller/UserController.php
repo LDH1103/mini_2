@@ -151,6 +151,10 @@ class UserController extends Controller{
         // return _BASE_REDIRECT."/user/login";
         return "login"._EXTENSION_PHP;
     }
+
+    public function modifyGet() {
+        return "modify"._EXTENSION_PHP;
+    }
 }
 
 ?>

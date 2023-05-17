@@ -1,31 +1,24 @@
-.titleJoin {
+.modifyTitle {
     text-align: center;
 }
-.header:hover {
+.modifyTitle:hover {
     color: #00000088;
 }
 .main_container {
-    margin: 50px auto;
-}
-.joinBox {
     margin: 30px auto;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #cccccc8c;
     border-radius: 10px;
     width: 50vw;
     min-width: 400px;
     max-width: 500px;
-    height: 30vh;
-    min-height: 400px;
+    height: 60vh;
+    min-height: 300px;
 }
 label {
     display: inline-block;
     width: 120px;
     margin: 5px;
-}
-.errMsg {
-    margin-left: 5px;
-    color: red;
 }
 input {
     width: 200px;
@@ -39,6 +32,7 @@ input:focus {
     padding: 5px;
     margin: 5px;
 }
-#joinBtn {
-    float: right;
+.errMsg {
+    margin-left: 5px;
+    color: red;
 }

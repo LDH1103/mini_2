@@ -37,7 +37,7 @@
                             <?php
                                 } else {
                             ?>
-                                    <li><a class="dropdown-item" href="#">마이페이지</a></li>
+                                    <li><a class="dropdown-item" href="/user/modify">마이페이지</a></li>
                                     <li><a class="dropdown-item" href="/user/logout">로그아웃</a></li>
                             <?php
                                 }
