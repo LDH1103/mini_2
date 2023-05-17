@@ -16,9 +16,16 @@ class ApiController extends Controller {
 
         if(count($result) !== 0) {
             $arrData["flg"] = "1";
-            $arrData["msg"] = "입력하신 아이디가 사용중입니다.";
+            $arrData["msg"] = "입력하신 아이디가 이미 사용중입니다.";
+        } else if(mb_strlen($arrGet["id"]) < 3 || mb_strlen($arrGet["id"]) > 12) {
+            $arrData["flg"] = "2";
+            $arrData["msg"] = "아이디는 영어와 숫자를 합해 3 ~ 12글자 사이로 입력해주세요.";
+        } else if(preg_match("/[^a-z0-9^]/i", $arrGet["id"])) {
+            $arrData["flg"] = "3";
+            $arrData["msg"] = "아이디는 숫자와 영문자만 사용가능합니다.";
         }
 
+        
         // 배열을 JSON으로 변경
         $json = json_encode($arrData);
         // http_response_code(400); // API 에러처리 테스트(에러 강제로 일으키기)

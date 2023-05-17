@@ -12,43 +12,36 @@
     <h1 class="titleJoin"><a href="/shop/main" class="header">Join Membership</a></h1>
     <div class="main_container">
         <form action="/user/join" method="post" class="joinBox">
-            <label for="id">아이디 *</label>
-            <input type="text" id="id" name="id" placeholder="3 ~ 12글자 사이" spellcheck="false">
-            <button type="button" onclick="chkDuplicationId()">중복 체크</button>
+            <label for="id">아이디</label>
+            <input type="text" id="id" name="id" placeholder="3 ~ 12글자 사이" spellcheck="false" value="<?php if(isset($this->arrInputVal["id"])) { echo $this->arrInputVal["id"]; } ?>">
+            <button type="button" onclick="chkDuplicationId();">중복 체크</button>
             <br>
             <span class="errMsg"><?php if(isset($this->errMsg)) { echo $this->errMsg; } ?></span>
             <span class="errMsg" id="errMsgId"><?php if(isset($this->arrError["id"])) { echo $this->arrError["id"]; } ?></span>
             <br>
-            <label for="pw">비밀번호 *</label>
+            <label for="pw">비밀번호</label>
             <input type="password" id="pw" name="pw" placeholder="8 ~ 20글자 사이" oninput="chkPassword()">
             <br>
-            <span class="errMsg"><?php if(isset($this->arrError["pw"])) { echo $this->arrError["pw"]; } ?></span>
+            <span class="errMsg" id="errMsgPw"><?php if(isset($this->arrError["pw"])) { echo $this->arrError["pw"]; } ?></span>
             <br>
-            <label for="check_pw">비밀번호 확인 *</label>
+            <label for="check_pw">비밀번호 확인</label>
             <input type="password" id="check_pw" name="check_pw" oninput="chkPassword()">
             <br>
+            <span class="errMsg"><?php if(isset($this->arrError["check_pw"])) { echo $this->arrError["check_pw"]; } ?></span>
             <span class="errMsg" id="chk_pw_msg"></span>
             <br>
-            <label for="name">이름 *</label>
-            <input type="text" id="name" name="name" spellcheck="false">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" spellcheck="false" maxlength="6" value="<?php if(isset($this->arrInputVal["name"])) { echo $this->arrInputVal["name"]; } ?>" oninput="this.value = this.value.replace(/[^ㄱ-힣.]/g, '').replace(/(\..*)\./g, '$1'); checkName();">
             <br>
-            <span class="errMsg"><?php if(isset($this->arrError["name_empty"])) { echo $this->arrError["name_empty"]; } ?></span>
+            <span class="errMsg" id="errMsgName"><?php if(isset($this->arrError["name_empty"])) { echo $this->arrError["name_empty"]; } ?></span>
             <span class="errMsg"><?php if(isset($this->arrError["name"])) { echo $this->arrError["name"]; } ?></span>
             <br>
-            <label for="address">주소 *</label>
-            <input type="text" id="address" name="address" spellcheck="false">
+            <label for="phone_num">전화번호</label>
+            <input type="tel" id="phone_num" name="phone_num" placeholder="숫자만 입력" maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); checkPhoneNumber();" spellcheck="false" value="<?php if(isset($this->arrInputVal["phonenum"])) { echo $this->arrInputVal["phonenum"]; } ?>">
             <br>
-            <label for="phone_num">전화번호 *</label>
-            <input type="tel" id="phone_num" name="phone_num" placeholder="숫자만 입력" maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" spellcheck="false">
+            <span class="errMsg" id="phone_num_error"><?php if(isset($this->arrError["phone_num"])) { echo $this->arrError["phone_num"]; } ?></span>
             <br>
-            <span class="errMsg"><?php if(isset($this->arrError["id"])) { echo $this->arrError["id"]; } ?></span>
-            <br>
-            <label for="email">이메일</label>
-            <input type="text" id="email" name="email" spellcheck="false">
             <button id="joinBtn">회원 가입</button>
-            <br>
-            <br>
-            <span>*표시는 필수 입력 항목입니다.</span>
         </form>
     </div>
     <script src="/application/view/js/join.js"></script>

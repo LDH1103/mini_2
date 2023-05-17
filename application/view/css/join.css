@@ -19,8 +19,8 @@
     width: 50vw;
     min-width: 400px;
     max-width: 500px;
-    height: 60vh;
-    min-height: 500px;
+    height: 30vh;
+    min-height: 400px;
 }
 label {
     display: inline-block;
@@ -28,5 +28,21 @@ label {
     margin: 5px;
 }
 .errMsg {
+    margin-left: 5px;
     color: red;
+}
+input {
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    margin: 5px;
+}
+input:focus {
+    outline: none;
+    border: 1px solid green;
+    padding: 5px;
+    margin: 5px;
+}
+#joinBtn {
+    float: right;
 }

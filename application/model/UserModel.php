@@ -27,7 +27,7 @@ class UserModel extends Model{
 
         // PW 추가한 동적 쿼리
         if($pwFlg) {
-            $prepare[":pw"] = $arrUserInfo["pw"];
+            $prepare[":pw"] = base64_encode($arrUserInfo["pw"]);
         }
 
         try {
@@ -49,28 +49,22 @@ class UserModel extends Model{
             ."      u_id "
             ."      ,u_pw "
             ."      ,u_name "
-            ."      ,u_address "
             ."      ,u_phone_num "
-            ."      ,u_email "
             ."      ,u_from_date "
             ." ) "
             ." VALUES( "
             ."      :u_id "
             ."      ,:u_pw "
             ."      ,:u_name "
-            ."      ,:u_address "
             ."      ,:u_phone_num "
-            ."      ,:u_email "
             ."      ,NOW() "
             ." ) "
             ;
         $arr_prepare = [
                 ":u_id"           => $arrUserInfo["id"]
-                ,":u_pw"          => $arrUserInfo["pw"]
+                ,":u_pw"          => base64_encode($arrUserInfo["pw"])
                 ,":u_name"        => $arrUserInfo["name"]
-                ,":u_address"     => $arrUserInfo["address"]
                 ,":u_phone_num"   => $arrUserInfo["phone_num"]
-                ,":u_email"       => $arrUserInfo["email"]
             ];
 
         try {

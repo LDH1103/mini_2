@@ -41,82 +41,100 @@ class UserController extends Controller{
         // 메인 페이지 리턴
         return "main"._EXTENSION_PHP;
     }
-
+    
     // 회원가입 페이지 리턴
     public function joinGet() {
         return "join"._EXTENSION_PHP;
     }
-
+    
     // 회원가입 처리
-
-    // public function test() {
-    //     $this->model->beginTransaction();
-    //     return $this->model->joinTest($_POST);
-    // }
-
-    // public function joinPost() {
-    //     $test = $this->test();
-    //     if(empty($test)) {
-    //         $this->model->joinUser($_POST);
-    //         $this->model->commit();
-    //         return "main"._EXTENSION_PHP;
-    //     } else {
-    //         echo "<script>alert('중복된 ID 입니다.');</script>";
-    //         return "join"._EXTENSION_PHP;
-    //     }
-    //     $this->model->close();
-    // }
-
     public function joinPost() {
         $arrPost = $_POST;
         $arrChkErr = [];
+        $arrInputVal = [];
         // 유효성 체크
         // ID 글자수 체크
+
         if(mb_strlen($arrPost["id"]) > 12 || mb_strlen($arrPost["id"]) < 3) {
             $arrChkErr["id"] = "아이디는 3 ~ 12글자 사이로 입력해주세요.";
+        } else {
+            $arrInputVal["id"] = $arrPost["id"];
         }
         // ID 영문자 숫자 체크넣기
-
+        // preg_match("/[^a-z0-9^]/i", ) : 영어, 숫자만 받는 정규식
         // PW 글자수 체크
+        if(preg_match("/[^a-z0-9^]/i", $arrPost["id"])) {
+            $arrChkErr["id"] = "아이디는 숫자와 영문자만 사용가능합니다.";
+        } else {
+            $arrInputVal["id"] = $arrPost["id"];
+        }
+
         if(mb_strlen($arrPost["pw"]) > 20 || mb_strlen($arrPost["pw"]) < 8) {
             $arrChkErr["pw"] = "비밀번호는 8 ~ 20글자 사이로 입력해주세요.";
         }
-
+        
         // PW 영문자 숫자 특수문자 체크 넣기
+        if(preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/", $arrPost["pw"])) {
+            $arrChkErr["pw"] = "비밀번호는 숫자와 영문자만 사용가능합니다.";
+        }
 
         // PW와 PWChk 확인
         if($arrPost["pw"] !== $arrPost["check_pw"]) {
-            $arrPost["check_pw"] = "비밀번호와 비밀번호 확인이 일치하지 않습니다.";
+            $arrChkErr["check_pw"] = "비밀번호와 비밀번호 확인이 일치하지 않습니다.";
+        } else if(empty($arrPost["check_pw"])) {
+            $arrChkErr["check_pw"] = "비밀번호 확인을 입력해주세요";
         }
-
+        
         // 이름 글자수 체크
-        if(mb_strlen($arrPost["name"]) === 0 ) {
+        if(mb_strlen($arrPost["name"]) === 0) {
             $arrChkErr["name_empty"] = "이름을 입력해주세요.";
+        } else {
+            $arrInputVal["name"] = $arrPost["name"];
+        }
+        
+        if(mb_strlen($arrPost["name"]) > 30) {
+            $arrChkErr["name"] = "이름은 30글자 이하로 입력해주세요.";
+        } else {
+            $arrInputVal["name"] = $arrPost["name"];
+        }
+        
+        // 전화번호 입력 확인
+        if(mb_strlen($arrPost["phone_num"]) === 0) {
+            $arrChkErr["phone_num"] = "전화번호를 입력해주세요.";
+        } else if(!preg_match("/^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/", $arrPost["phone_num"])) {
+            $arrChkErr["phone_num"] = "전화번호가 형식에 맞지 않습니다.";
+        } else {
+            $arrInputVal["phonenum"] = $arrPost["phone_num"];
         }
 
-        if(mb_strlen($arrPost["name"]) > 30 ) {
-            $arrChkErr["name"] = "이름은 30글자 이하로 입력해주세요.";
+        $result = $this->model->getUser($arrPost, false);
+    
+        // 유저 유무 체크
+        // if(count($result) !== 0) {
+        //     $errMsg = "입력하신 아이디가 사용중입니다.";
+        //     $this->addDynamicProperty("errMsg", $errMsg);
+        //     // return "join"._EXTENSION_PHP;
+        // } else {
+        //     $arrInputVal["id"] = $arrPost["id"];
+        // }
+        if(count($result) !== 0) {
+            $arrChkErr["id"] = "입력하신 아이디가 사용중입니다.";
+        } else {
+            $arrInputVal["id"] = $arrPost["id"];
         }
 
         // 유효성 체크 에러일 경우
         if(!empty($arrChkErr)) {
             // 에러메세지 세팅
             $this->addDynamicProperty('arrError', $arrChkErr);
+            $this->addDynamicProperty('arrInputVal', $arrInputVal);
             return "join"._EXTENSION_PHP;
         }
-
-        $result = $this->model->getUser($arrPost, false);
-
-        // 유저 유무 체크
-        if(count($result) !== 0) {
-            $errMsg = "입력하신 아이디가 사용중입니다.";
-            $this->addDynamicProperty("errMsg", $errMsg);
-            return "join"._EXTENSION_PHP;
-        }
+        
 
         // Transaction Start
         $this->model->beginTransaction();
-
+        
         // user insert
         if(!$this->model->joinUser($arrPost)) {
             // 예외처리 롤백
@@ -124,12 +142,14 @@ class UserController extends Controller{
             echo "User Regist ERROR";
             exit();
         }
-
+        
         // 정상처리 커밋, Transaction End
+        echo "<script>alert('가입이 완료되었습니다');</script>";
         $this->model->commit();
 
         // 로그인 페이지로 이동
-        return _BASE_REDIRECT."/user/login";
+        // return _BASE_REDIRECT."/user/login";
+        return "login"._EXTENSION_PHP;
     }
 }
 
