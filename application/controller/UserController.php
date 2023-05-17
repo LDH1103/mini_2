@@ -131,7 +131,6 @@ class UserController extends Controller{
             return "join"._EXTENSION_PHP;
         }
         
-
         // Transaction Start
         $this->model->beginTransaction();
         
@@ -155,6 +154,14 @@ class UserController extends Controller{
     public function modifyGet() {
         return "modify"._EXTENSION_PHP;
     }
-}
 
+    // 세션에 저장된 id와 일치하는 id의 정보 조회(수정 페이지)
+    public function sessionIdSel() {
+        $arr_param["id"] = $_SESSION[_STR_LOGIN_ID];
+        $arr_result = $this->model->getUser($arr_param, false);
+        $this->model->close(); // DB 파기
+        return $arr_result[0];
+    }
+
+}
 ?>

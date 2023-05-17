@@ -12,7 +12,7 @@ class Controller {
     private static $modelList = [];
     // 인증이 필요한 페이지 이름을 적어줌
     // private static $arrNeedAuth = ["product/list"]; 
-    private static $arrNeedAuth = ["user/logout"]; 
+    private static $arrNeedAuth = ["user/modify"]; 
     
     // 생성자
     // + $identityName : User, $action : loginGet

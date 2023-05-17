@@ -40,7 +40,7 @@
             <br>
             <span class="errMsg" id="phone_num_error"><?php if(isset($this->arrError["phone_num"])) { echo $this->arrError["phone_num"]; } ?></span>
             <br>
-            <button id="joinBtn">회원 가입</button>
+            <button type="submit" id="joinBtn">회원 가입</button>
         </form>
     </div>
     <script src="/application/view/js/join.js"></script>

@@ -12,6 +12,8 @@ class UserModel extends Model{
             ."      user_info "
             ." WHERE "
             ."      u_id = :id "
+            ." AND "
+            ."      u_del_flg = 0 "
             ;
 
         // PW 추가한 동적 쿼리

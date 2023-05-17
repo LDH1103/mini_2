@@ -36,3 +36,6 @@ input:focus {
     margin-left: 5px;
     color: red;
 }
+#submit_btn {
+    float: right;
+}
