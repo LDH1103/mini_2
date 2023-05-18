@@ -14,14 +14,11 @@ $arr_result = $this->sessionIdSel();
 <body>
     <h1 class="modifyTitle"><a href="/shop/main">My page</a></h1>
     <div class="main_container">
-        <div class="modal">
-            <div class="modal_msg">탈퇴 하시겠습니까?</div>
-            <form action="/user/out/" method="post" id="modal_form">
-                <input type="hidden" name="u_no" value="<?php echo $arr_result["u_no"] ?>">
-                <button type="button" id="cancle_btn">취소</button>
-                <button type="submit" id="submit_btn">확인</button>
-            </form>
-        </div>
+        <!-- 탈퇴 처리를 위한 form -->
+        <form action="/user/out/" method="post" id="modal_form">
+            <input type="hidden" name="u_no" value="<?php echo $arr_result["u_no"] ?>">
+        </form>
+        <!-- 수정을 위한 form -->
         <form action="/user/modify" method="post">
             <input type="hidden" name="u_no" id="u_no" value="<?php echo $arr_result["u_no"] ?>">
             <input type="hidden" name="id" id="id" value="<?php echo $arr_result["u_id"] ?>">

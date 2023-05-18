@@ -148,6 +148,7 @@ class UserModel extends Model{
             ."      user_info "
             ." SET "
             ."      u_del_flg = 1 "
+            ."      ,u_to_date = NOW() "
             ." WHERE "
             ."      u_no = :u_no "
             ;
