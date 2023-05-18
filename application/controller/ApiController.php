@@ -12,6 +12,7 @@ class ApiController extends Controller {
         // model 호출
         $this->model = $this->getmodel("User");
 
+        // + 사용자 정보 가져오기
         $result = $this->model->getUser($arrGet, false);
 
         if(count($result) !== 0) {
@@ -29,7 +30,9 @@ class ApiController extends Controller {
         // 배열을 JSON으로 변경
         $json = json_encode($arrData);
         // http_response_code(400); // API 에러처리 테스트(에러 강제로 일으키기)
+        // + JSON 형식으로 응답 설정
         header('Content-type: application/json');
+        // + JSON 데이터 출력
         echo $json;
         exit();
     }
