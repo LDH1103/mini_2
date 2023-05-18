@@ -8,7 +8,7 @@ class UrlUtil {
     public static function getUrl() {
         // + $_GET["url"]에 값이 있으면 그 값을, 없으면 빈 문자열을 리턴
         // + ex) localhost/user/login 이라면 user/login을 리턴
-        return $path = isset($_GET["url"]) ? $_GET["url"] : "";
+        return isset($_GET["url"]) ? $_GET["url"] : "";
     }
 
     // URL을 "/"로 구분해서 배열을 만들고 리턴

@@ -78,6 +78,57 @@ class UserModel extends Model{
         }
     }
 
+        // Update User
+        public function UpdateUser($arrUserInfo) {
+            $sql =
+                " Update "
+                ."      user_info "
+                ." SET "
+                ."      u_pw = :u_pw "
+                ."      ,u_name = :u_name "
+                ."      ,u_phone_num = :u_phone_num "
+                ." WHERE "
+                ."      u_no = :u_no "
+                ;
+            $arr_prepare = [
+                    ":u_no"           => $arrUserInfo["u_no"]
+                    ,":u_pw"          => base64_encode($arrUserInfo["pw"])
+                    ,":u_name"        => $arrUserInfo["name"]
+                    ,":u_phone_num"   => $arrUserInfo["phone_num"]
+                ];
+    
+            try {
+                $stmt = $this->conn->prepare( $sql );
+                $result = $stmt->execute( $arr_prepare );
+                return $result;
+            } catch ( Exception $e ) {
+                return false;
+            }
+        }
+
+        // delete User
+        public function delUser($arrUserInfo) {
+            $sql =
+                " Update "
+                ."      user_info "
+                ." SET "
+                ."      u_del_flg = 1 "
+                ." WHERE "
+                ."      u_no = :u_no "
+                ;
+            $arr_prepare = [
+                    ":u_no"           => $arrUserInfo["u_no"]
+                ];
+    
+            try {
+                $stmt = $this->conn->prepare( $sql );
+                $result = $stmt->execute( $arr_prepare );
+                return $result;
+            } catch ( Exception $e ) {
+                return false;
+            }
+        }
+
 }
 
 ?>

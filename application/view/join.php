@@ -30,7 +30,7 @@
             <span class="errMsg" id="chk_pw_msg"><?php if(isset($this->arrError["check_pw"])) { echo $this->arrError["check_pw"]; } ?></span>
             <br>
             <label for="name">이름</label>
-            <input type="text" id="name" name="name" spellcheck="false" maxlength="6" value="<?php if(isset($this->arrInputVal["name"])) { echo $this->arrInputVal["name"]; } ?>" oninput="this.value = this.value.replace(/[^ㄱ-힣.]/g, '').replace(/(\..*)\./g, '$1'); checkName();">
+            <input type="text" id="name" name="name" spellcheck="false" maxlength="6" value="<?php if(isset($this->arrInputVal["name"])) { echo $this->arrInputVal["name"]; } ?>" oninput="this.value = this.value.replace(/[^ㄱ-ㅎ||ㅏ-ㅣ||가-힣||a-z||A-Z.]/g, '').replace(/(\..*)\./g, '$1'); checkName();">
             <br>
             <span class="errMsg" id="errMsgName"><?php if(isset($this->arrError["name_empty"])) { echo $this->arrError["name_empty"]; } ?></span>
             <span class="errMsg"><?php if(isset($this->arrError["name"])) { echo $this->arrError["name"]; } ?></span>
@@ -44,5 +44,6 @@
         </form>
     </div>
     <script src="/application/view/js/join.js"></script>
+    <script src="/application/view/js/common.js"></script>
 </body>
 </html>

@@ -119,3 +119,7 @@
 .btn_right {
     float: right;
 }
+
+#welcome_msg {
+    color: rgb(0, 212, 81);
+}

@@ -74,7 +74,7 @@
                 <?php
                 if(isset($_SESSION[_STR_LOGIN_ID])) {
                 ?>
-                    <li><a href="#"><?php echo $_SESSION[_STR_LOGIN_NAME]."님, 반갑습니다" ?></a></li>
+                    <li><a href="/user/modify" id="welcome_msg"><?php echo $_SESSION[_STR_LOGIN_NAME]."님, 반갑습니다" ?></a></li>
                 <?php
                 }
                 ?>
