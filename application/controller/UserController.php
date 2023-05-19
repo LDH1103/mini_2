@@ -36,6 +36,7 @@ class UserController extends Controller{
         // 메인 페이지 리턴
         // var_dump($result);
         return _BASE_REDIRECT."/shop/main";
+        // return "main"._EXTENSTION_PHP;
     }
     // 로그인 페이지 ----------------------------------------------
 
@@ -45,7 +46,8 @@ class UserController extends Controller{
         session_unset();
         session_destroy();
         // 메인 페이지 리턴
-        return "main"._EXTENSION_PHP;
+        // return "main"._EXTENSION_PHP;
+        return _BASE_REDIRECT."/shop/main";
     }
     // 메인 페이지 ------------------------------------------------
     
