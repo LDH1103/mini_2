@@ -117,7 +117,7 @@ class UserModel extends Model{
         $arr_prepare = [
             ":u_no" => $arrUserInfo["u_no"]
         ];
-        
+
         // 업데이트할 필드와 값을 동적으로 생성
         foreach($arrUserInfo as $key => $value) {
             if($key === "pw" && $value !== "") {
@@ -128,13 +128,13 @@ class UserModel extends Model{
                 $arr_prepare[":u_$key"] = $value;
             }
         }
-        
+
         // 맨 처음 쉼표 제거
         // $sql = ltrim($sql, ",");
         $sql = preg_replace("/,/", "", $sql, 1);
-        
+
         $sql .= " WHERE u_no = :u_no ";
-        
+
         try {
             $stmt = $this->conn->prepare($sql);
             $result = $stmt->execute($arr_prepare);
