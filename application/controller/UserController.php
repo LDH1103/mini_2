@@ -10,6 +10,9 @@ class UserController extends Controller{
     // 로그인 페이지 ----------------------------------------------
     // + GET 방식으로 로그인 페이지를 요청할 때 실행되는 메서드
     public function loginGet() {
+        if($_SESSION) {
+            return _BASE_REDIRECT."/shop/main";
+        }
         return "login"._EXTENSION_PHP;
     }
 
@@ -49,6 +52,9 @@ class UserController extends Controller{
     // 회원 가입 --------------------------------------------------
     // 회원가입 페이지 리턴
     public function joinGet() {
+        if($_SESSION) {
+            return _BASE_REDIRECT."/shop/main";
+        }
         return "join"._EXTENSION_PHP;
     }
     
@@ -165,9 +171,29 @@ class UserController extends Controller{
 
     // 회원정보 수정 ----------------------------------------------
     public function modifyGet() {
-        return "modify"._EXTENSION_PHP;
+        if(isset($_SESSION["chk_flg"])) {
+            unset($_SESSION["chk_flg"]);
+            return "modify"._EXTENSION_PHP;
+        } else {
+            return "modifychk"._EXTENSION_PHP;
+        }
     }
     
+    public function modifychkPost() {
+        $arr_param["id"] = $_SESSION[_STR_LOGIN_ID];
+        $arr_result = $this->model->getUser($arr_param, false);
+        $this->model->close(); // DB 파기
+
+        if(base64_encode($_POST["password_chk"]) === $arr_result[0]["u_pw"] ) {
+            $_SESSION["chk_flg"] = 1;
+            return "Location: /user/modify";
+        }
+        else {
+            echo "<script>alert('잘못된 비밀번호입니다.');</script>";
+            return "modifychk.php";
+        }
+    }
+
     // 세션에 저장된 id와 일치하는 id의 정보 조회(수정 페이지)
     public function sessionIdSel() {
         $arr_param["id"] = $_SESSION[_STR_LOGIN_ID];
@@ -180,51 +206,44 @@ class UserController extends Controller{
         $arrPost = $_POST;
         $arrChkErr = [];
         $arrInputVal = [];
-
-        // PW 글자수 체크
-        if(preg_match("/[^a-z0-9^]/i", $arrPost["id"])) {
-            $arrChkErr["id"] = "아이디는 숫자와 영문자만 사용가능합니다.";
-        } else {
-            $arrInputVal["id"] = $arrPost["id"];
-        }
         
-        if(mb_strlen($arrPost["pw"]) > 20 || mb_strlen($arrPost["pw"]) < 8) {
+        if(!isset($arrPost["pw"]) && mb_strlen($arrPost["pw"]) > 20 || !isset($arrPost["pw"]) && mb_strlen($arrPost["pw"]) < 8) {
             $arrChkErr["pw"] = "비밀번호는 8 ~ 20글자 사이로 입력해주세요.";
         }
         
         // PW 영문자 숫자 특수문자 체크 넣기
-        if(preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/", $arrPost["pw"])) {
+        if($arrPost["pw"] && preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/", $arrPost["pw"])) {
             $arrChkErr["pw"] = "비밀번호는 숫자와 영문자만 사용가능합니다.";
         }
         
         // PW와 PWChk 확인
-        if($arrPost["pw"] !== $arrPost["check_pw"]) {
+        if($arrPost["check_pw"] && $arrPost["pw"] !== $arrPost["check_pw"]) {
             $arrChkErr["check_pw"] = "비밀번호와 비밀번호 확인이 일치하지 않습니다.";
-        } else if(empty($arrPost["check_pw"])) {
+        } else if($arrPost["pw"] && empty($arrPost["check_pw"])) {
             $arrChkErr["check_pw"] = "비밀번호 확인을 입력해주세요";
         }
         
         // 이름 글자수 체크
-        if(mb_strlen($arrPost["name"]) === 0) {
+        if($arrPost["name"] && mb_strlen($arrPost["name"]) === 0) {
             $arrChkErr["name_empty"] = "이름을 입력해주세요.";
         } else {
             $arrInputVal["name"] = $arrPost["name"];
         }
         
-        if(preg_match("/^[가-힣||a-z||A-Z]$/", $arrPost["name"])) {
+        if($arrPost["name"] && preg_match("/^[가-힣||a-z||A-Z]$/", $arrPost["name"])) {
             $arrChkErr["name"] = "이름이 형식에 맞지 않습니다.";
         } else {
             $arrInputVal["name"] = $arrPost["name"];
         }
         
-        if(mb_strlen($arrPost["name"]) > 30) {
+        if($arrPost["name"] && mb_strlen($arrPost["name"]) > 30) {
             $arrChkErr["name"] = "이름은 30글자 이하로 입력해주세요.";
         } else {
             $arrInputVal["name"] = $arrPost["name"];
         }
         
         // 전화번호 입력 확인
-        if(mb_strlen($arrPost["phone_num"]) === 0) {
+        if($arrPost["phone_num"] && mb_strlen($arrPost["phone_num"]) === 0) {
             $arrChkErr["phone_num"] = "전화번호를 입력해주세요.";
         } else if(!preg_match("/^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/", $arrPost["phone_num"])) {
             $arrChkErr["phone_num"] = "전화번호가 형식에 맞지 않습니다.";

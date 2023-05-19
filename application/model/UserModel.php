@@ -79,66 +79,70 @@ class UserModel extends Model{
     }
 
     // Update User
-    public function UpdateUser($arrUserInfo) {
-        $sql =
-            " Update "
-            ."      user_info "
-            ." SET "
-            ."      u_pw = :u_pw "
-            ."      ,u_name = :u_name "
-            ."      ,u_phone_num = :u_phone_num "
-            ." WHERE "
-            ."      u_no = :u_no "
-            ;
-        $arr_prepare = [
-                ":u_no"           => $arrUserInfo["u_no"]
-                ,":u_pw"          => base64_encode($arrUserInfo["pw"])
-                ,":u_name"        => $arrUserInfo["name"]
-                ,":u_phone_num"   => $arrUserInfo["phone_num"]
-            ];
-
-        try {
-            $stmt = $this->conn->prepare( $sql );
-            $result = $stmt->execute( $arr_prepare );
-            return $result;
-        } catch ( Exception $e ) {
-            return false;
-        }
-    }
-
-    // ----------------------------------------
-    // Update User
     // public function UpdateUser($arrUserInfo) {
     //     $sql =
-    //         " UPDATE "
+    //         " Update "
     //         ."      user_info "
-    //         ." SET ";
-        
+    //         ." SET "
+    //         ."      u_pw = :u_pw "
+    //         ."      ,u_name = :u_name "
+    //         ."      ,u_phone_num = :u_phone_num "
+    //         ." WHERE "
+    //         ."      u_no = :u_no "
+    //         ;
     //     $arr_prepare = [
-    //         ":u_no" => $arrUserInfo["u_no"]
-    //     ];
-        
-    //     // 업데이트할 필드와 값을 동적으로 생성
-    //     foreach ($arrUserInfo as $key => $value) {
-    //         if ($key !== "u_no" && !empty($value)) {
-    //             $sql .= " $key = :$key,";
-    //             $arr_prepare[":$key"] = $value;
-    //         }
-    //     }
-        
-    //     // 맨 마지막 쉼표 제거
-    //     $sql = rtrim($sql, ",");
-        
-    //     $sql .= " WHERE u_no = :u_no";
-        
+    //             ":u_no"           => $arrUserInfo["u_no"]
+    //             ,":u_pw"          => base64_encode($arrUserInfo["pw"])
+    //             ,":u_name"        => $arrUserInfo["name"]
+    //             ,":u_phone_num"   => $arrUserInfo["phone_num"]
+    //         ];
+
     //     try {
-    //         $stmt = $this->conn->prepare($sql);
-    //         $result = $stmt->execute($arr_prepare);
+    //         $stmt = $this->conn->prepare( $sql );
+    //         $result = $stmt->execute( $arr_prepare );
     //         return $result;
-    //     } catch (Exception $e) {
+    //     } catch ( Exception $e ) {
     //         return false;
     //     }
     // }
+
+    // ----------------------------------------
+    // Update User
+    public function UpdateUser($arrUserInfo) {
+        $sql =
+            " UPDATE "
+            ."      user_info "
+            ." SET ";
+        
+        $arr_prepare = [
+            ":u_no" => $arrUserInfo["u_no"]
+        ];
+        
+        // 업데이트할 필드와 값을 동적으로 생성
+        foreach($arrUserInfo as $key => $value) {
+            if($key === "pw" && $value !== "") {
+                $sql .= " u_pw = :u_$key, ";
+                $arr_prepare[":u_$key"] = base64_encode($value);
+            } else if ($key !== "u_no" && $value !== "") {
+                $sql .= " ,u_$key = :u_$key ";
+                $arr_prepare[":u_$key"] = $value;
+            }
+        }
+        
+        // 맨 처음 쉼표 제거
+        // $sql = ltrim($sql, ",");
+        $sql = preg_replace("/,/", "", $sql, 1);
+        
+        $sql .= " WHERE u_no = :u_no ";
+        
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $result = $stmt->execute($arr_prepare);
+            return $result;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
     // ----------------------------------------
 
     // delete User
