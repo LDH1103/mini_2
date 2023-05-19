@@ -123,3 +123,8 @@
 #welcome_msg {
     color: rgb(0, 212, 81);
 }
+
+.item_img {
+    width: 280px;
+    height: 280px;
+}

@@ -1,3 +1,6 @@
+<?php
+$arr_itemList = $this->item();
+?>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -130,226 +133,32 @@
             <!-- xxl : 1400px -->
             <div class="row row-cols-xxl-4 row-cols-lg-3 row-cols-sm-2 p-3">
                 <!-- d-flex justify-content-center : 중앙정렬( row-cols-xxl-4 row-cols-lg-3 ) -->
+                <?php
+                foreach($arr_itemList as $val) {
+                ?>
+                    <div class="col d-flex justify-content-center p-1">
+                        <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
+                            <img src="<?php echo $val["i_img"]?>" class="card-img-top item_img" alt="상품">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $val["i_name"]?></h5>
+                                <p class="card-text"><?php echo "\\".$val["i_price"]?></p>
+                                <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    구매하기
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
                 <div class="col d-flex justify-content-center p-1">
                     <!-- 중앙정렬 : style에 float: none; margin: 0 auto; -->
                     <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
+                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"class="card-img-top" alt="상품">
                         <div class="card-body">
                             <h5 class="card-title">티셔츠</h5>
                             <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                구매하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex justify-content-center p-1">
-                    <div class="card" style="width: 18rem; float: none; margin: 0 auto;">
-                        <img src="https://contents.sixshop.com/uploadedFiles/162329/product/image_1619492799417.jpg"
-                            class="card-img-top" alt="상품">
-                        <div class="card-body">
-                            <h5 class="card-title">티셔츠</h5>
-                            <p class="card-text">입으면 존재감이 엄청나질것 같은 티셔츠 입니다.</p>
-                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
+                            <button type="button" class="btn btn-dark btn_right" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 구매하기
                             </button>
                         </div>

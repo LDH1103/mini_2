@@ -212,7 +212,7 @@ class UserController extends Controller{
         }
         
         // PW 영문자 숫자 특수문자 체크 넣기
-        if($arrPost["pw"] && preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/", $arrPost["pw"])) {
+        if($arrPost["pw"] && preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/", $arrPost["pw"]) === 0) {
             $arrChkErr["pw"] = "비밀번호는 숫자와 영문자만 사용가능합니다.";
         }
         
@@ -230,7 +230,7 @@ class UserController extends Controller{
             $arrInputVal["name"] = $arrPost["name"];
         }
         
-        if($arrPost["name"] && preg_match("/^[가-힣||a-z||A-Z]$/", $arrPost["name"])) {
+        if($arrPost["name"] && preg_match("/[^가-힣a-zA-Z]/u", $arrPost["name"]) !== 0) {
             $arrChkErr["name"] = "이름이 형식에 맞지 않습니다.";
         } else {
             $arrInputVal["name"] = $arrPost["name"];
