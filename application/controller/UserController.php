@@ -76,7 +76,7 @@ class UserController extends Controller{
         // ID 영문자 숫자 체크넣기
         // preg_match("/[^a-z0-9^]/i", ) : 영어, 숫자만 받는 정규식
         // PW 글자수 체크
-        if(preg_match("/[^a-z0-9^]/i", $arrPost["id"])) {
+        if(!preg_match("/^[a-zA-Z0-9]+$/", $arrPost["id"])) {
             $arrChkErr["id"] = "아이디는 숫자와 영문자만 사용가능합니다.";
         } else {
             $arrInputVal["id"] = $arrPost["id"];
