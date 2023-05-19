@@ -113,7 +113,7 @@ class UserModel extends Model{
             " UPDATE "
             ."      user_info "
             ." SET ";
-        
+
         $arr_prepare = [
             ":u_no" => $arrUserInfo["u_no"]
         ];
