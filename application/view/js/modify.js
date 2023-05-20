@@ -8,3 +8,9 @@ outBtn.addEventListener('click', () => {
         document.getElementById('modal_form').submit();
     }
 });
+
+const cancleBtn = document.getElementById('cancle_btn');
+
+cancleBtn.addEventListener('click', () => {
+    location.href = '/shop/main/'
+});

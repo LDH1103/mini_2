@@ -7,6 +7,7 @@ $arr_result = $this->sessionIdSel();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="/application/view/css/common.css">
     <link rel="stylesheet" href="/application/view/css/modify.css">
     <title>마이페이지</title>
@@ -46,9 +47,12 @@ $arr_result = $this->sessionIdSel();
             <br>
             <span class="errMsg" id="phone_num_error"><?php if(isset($this->arrError["phone_num"])) { echo $this->arrError["phone_num"]; } ?></span>
             <br>
-            <button id="submit_btn">수정</button>
+            <div class="btns">
+                <button type="button" id="out_button" class="btn btn-dark">회원 탙퇴</button>
+                <button type="submit" id="submit_btn" class="btn btn-dark">수정</button>
+                <button type="button" id="cancle_btn" class="btn btn-dark">취소</button>
+            </div>
             <br>
-            <button type="button" id="out_button">회원 탙퇴</button>
         </form>
     </div>
     <script src="/application/view/js/modify.js"></script>

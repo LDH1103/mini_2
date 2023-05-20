@@ -40,27 +40,6 @@ input:focus {
     margin-left: 5px;
     color: red;
 }
-#submit_btn {
-    float: right;
-}
-.modal {
-    position: absolute;
-    margin: 140px;
-    width: 200px;
-    height: 100px;
-    display: none;
-    background-color: white;
-    border: 1px solid #0000005d;
-    border-radius: 5px;
+.btns {
     text-align: center;
-}
-#modal_form {
-    margin: 0 auto;
-    width: 100px;
-    display: flex;
-    justify-content: space-around;
-}
-.modal_msg {
-    color: red;
-    margin: 20px auto;
 }
