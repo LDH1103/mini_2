@@ -4,7 +4,7 @@ namespace application\model;
 
 class UserModel extends Model{
     // $pwFlg = true : 두번째 파라미터가 있으면 받아서 씀
-    public function getUser($arrUserInfo, $pwFlg = true) {
+    public function getUser(&$arrUserInfo, $pwFlg = true) {
         $sql = 
             " SELECT "
             ."      * "
@@ -44,7 +44,7 @@ class UserModel extends Model{
     }
 
     //Insert User
-    public function joinUser($arrUserInfo) {
+    public function joinUser(&$arrUserInfo) {
         $sql =
             " INSERT INTO "
             ."  user_info( "
@@ -108,7 +108,7 @@ class UserModel extends Model{
 
     // ----------------------------------------
     // Update User
-    public function UpdateUser($arrUserInfo) {
+    public function UpdateUser(&$arrUserInfo) {
         $sql =
             " UPDATE "
             ."      user_info "
@@ -146,7 +146,7 @@ class UserModel extends Model{
     // ----------------------------------------
 
     // delete User
-    public function delUser($arrUserInfo) {
+    public function delUser(&$arrUserInfo) {
         $sql =
             " Update "
             ."      user_info "
