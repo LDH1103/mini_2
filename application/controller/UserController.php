@@ -36,7 +36,7 @@ class UserController extends Controller{
         // 메인 페이지 리턴
         // var_dump($result);
         return _BASE_REDIRECT."/shop/main";
-        // return "main"._EXTENSTION_PHP;
+        // return "main"._EXTENSION_PHP;
     }
     // 로그인 페이지 ----------------------------------------------
 
@@ -76,7 +76,7 @@ class UserController extends Controller{
         // ID 영문자 숫자 체크넣기
         // preg_match("/[^a-z0-9^]/i", ) : 영어, 숫자만 받는 정규식
         // PW 글자수 체크
-        if(preg_match("/[^a-z0-9^]/i", $arrPost["id"])) {
+        if(!preg_match("/^[a-zA-Z0-9]+$/", $arrPost["id"])) {
             $arrChkErr["id"] = "아이디는 숫자와 영문자만 사용가능합니다.";
         } else {
             $arrInputVal["id"] = $arrPost["id"];
@@ -180,7 +180,7 @@ class UserController extends Controller{
             return "modifychk"._EXTENSION_PHP;
         }
     }
-    
+
     public function modifychkPost() {
         $arr_param["id"] = $_SESSION[_STR_LOGIN_ID];
         $arr_result = $this->model->getUser($arr_param, false);
@@ -188,11 +188,11 @@ class UserController extends Controller{
 
         if(base64_encode($_POST["password_chk"]) === $arr_result[0]["u_pw"] ) {
             $_SESSION["chk_flg"] = 1;
-            return "Location: /user/modify";
+            return _BASE_REDIRECT."/user/modify";
         }
         else {
             echo "<script>alert('잘못된 비밀번호입니다.');</script>";
-            return "modifychk.php";
+            return "modifychk"._EXTENSION_PHP;
         }
     }
 
@@ -303,11 +303,9 @@ class UserController extends Controller{
         session_destroy();
 
         // 정상처리 커밋, Transaction End
-        echo "<script>alert('탈퇴가 완료되었습니다');</script>";
         $this->model->commit();
+        echo "<script>alert('탈퇴 완료'); window.location.href = '/shop/main';</script>";
 
-
-        return "main"._EXTENSION_PHP;
     }
     // 회원 탈퇴 --------------------------------------------------
 
