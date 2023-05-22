@@ -49,13 +49,13 @@ $arr_result = $this->sessionIdSel();
             <br>
             <div class="btns">
                 <button type="button" id="out_button" class="btn btn-dark">회원 탙퇴</button>
-                <button type="submit" id="submit_btn" class="btn btn-dark">수정</button>
+                <button type="button" id="submit_btn" class="btn btn-dark">수정</button>
                 <button type="button" id="cancle_btn" class="btn btn-dark">취소</button>
             </div>
             <br>
         </form>
     </div>
-    <script src="/application/view/js/modify.js"></script>
     <script src="/application/view/js/common.js"></script>
+    <script src="/application/view/js/modify.js"></script>
 </body>
 </html>

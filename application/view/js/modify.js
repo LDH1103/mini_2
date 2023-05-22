@@ -12,5 +12,5 @@ outBtn.addEventListener('click', () => {
 const cancleBtn = document.getElementById('cancle_btn');
 
 cancleBtn.addEventListener('click', () => {
-    location.href = '/shop/main/'
+    location.href = '/shop/main/';
 });
